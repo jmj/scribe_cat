@@ -1,0 +1,17 @@
+thrift -I if --gen c_glib if/fb303.thrift
+thrift -I if --gen c_glib if/scribe.thrift
+thrift -I if --gen c_glib if/bucketupdater.thrift
+
+gcc -I/usr/local/include/thrift -I/usr/include/glib-2.0 -o scribe.o -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -c gen-c_glib/scribe.c
+
+gcc -I/usr/local/include/thrift -I/usr/include/glib-2.0 -o scribe_types.o -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -c gen-c_glib/scribe_types.c
+
+gcc -I/usr/local/include/thrift -I/usr/include/glib-2.0 -o facebook_service.o -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -c gen-c_glib/facebook_service.c
+
+gcc -I/usr/local/include/thrift -I/usr/include/glib-2.0 -o bucket_store_mapping.o -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -c gen-c_glib/bucket_store_mapping.c
+
+gcc -I/usr/local/include/thrift -I/usr/include/glib-2.0 -o bucketupdater_types.o -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -c gen-c_glib/bucketupdater_types.c
+
+gcc -I/usr/local/include/thrift -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -o scribe_cat.o -c scribe_cat.c
+
+gcc -lthrift_c_glib -lglib-2.0 -lgobject-2.0 -o scribe_cat bucket_store_mapping.o bucketupdater_types.o facebook_service.o scribe_cat.o scribe.o scribe_types.o
