@@ -56,5 +56,7 @@ int log(){
     scribe_client_log(iface, &result, messages, &error);
 
 
-    //scribe_if_log(iface, &result, messages, &error);
+    //scribe_i f_log(iface, &result, messages, &error);
+    return 0;
+
 }
