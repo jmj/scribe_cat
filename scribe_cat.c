@@ -45,18 +45,11 @@ int log(){
     messages = g_ptr_array_new();
 
     log = g_object_new(TYPE_LOG_ENTRY, NULL);
-    //g_object_set_property(G_OBJECT(log), "category", "test");
-    //g_object_set_property(G_OBJECT(log), "message", "foo");
     log->category = "TEST";
     log->message = "This is a test message\n\0";
-    //log = g_object_new(TYPE_LOG_ENTRY, "category", "Test",
-    //    "message", "foo", NULL);
 
     g_ptr_array_add(messages, log);
     scribe_client_log(iface, &result, messages, &error);
-
-
-    //scribe_i f_log(iface, &result, messages, &error);
     return 0;
 
 }
